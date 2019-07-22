@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <import resource="Spring_Maybatis_Context.xml"/>
+    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+        <constructor-arg index="0" ref="sqlSessionFactory"/>
+    </bean>
+    <bean id="timer" class="java.util.Timer"></bean>
+    <bean id="sessionManage" class="pers.culushishui.service.beans.impl.SessionManageImpl">
+        <constructor-arg ref="timer"/>
+    </bean>
+    <bean name="UserTableImp" class="pers.culushishui.service.beans.impl.UserTableImpl">
+        <constructor-arg name="sqlSession" ref="sqlSession"/>
+        <property name="sessionManage" ref="sessionManage"/>
+    </bean>
+
+</beans>

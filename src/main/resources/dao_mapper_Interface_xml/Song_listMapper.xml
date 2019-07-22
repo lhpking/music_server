@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.culushishui.dao.mapper.Song_listMapper">
+    <resultMap id="BaseResultMap" type="pers.culushishui.dao.model.Song_list">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="NAME" jdbcType="VARCHAR" property="name"/>
+        <result column="ICON_ADDRESS" jdbcType="VARCHAR" property="iconAddress"/>
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="NUMBER_OF_VISITS" jdbcType="BIGINT" property="numberOfVisits"/>
+        <result column="songs_llst" jdbcType="VARCHAR" property="songsLlst"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, NAME, ICON_ADDRESS, USER_ID, CREATED_TIME, NUMBER_OF_VISITS, songs_llst, description
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from song_list
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from song_list
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="pers.culushishui.dao.model.Song_list">
+        insert into song_list (id, NAME, ICON_ADDRESS,
+        USER_ID, CREATED_TIME, NUMBER_OF_VISITS,
+        songs_llst, description)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{iconAddress,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{numberOfVisits,jdbcType=BIGINT},
+        #{songsLlst,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="pers.culushishui.dao.model.Song_list">
+        insert into song_list
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                NAME,
+            </if>
+            <if test="iconAddress != null">
+                ICON_ADDRESS,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME,
+            </if>
+            <if test="numberOfVisits != null">
+                NUMBER_OF_VISITS,
+            </if>
+            <if test="songsLlst != null">
+                songs_llst,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="iconAddress != null">
+                #{iconAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="numberOfVisits != null">
+                #{numberOfVisits,jdbcType=BIGINT},
+            </if>
+            <if test="songsLlst != null">
+                #{songsLlst,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="pers.culushishui.dao.model.Song_list">
+        update song_list
+        <set>
+            <if test="name != null">
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="iconAddress != null">
+                ICON_ADDRESS = #{iconAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="numberOfVisits != null">
+                NUMBER_OF_VISITS = #{numberOfVisits,jdbcType=BIGINT},
+            </if>
+            <if test="songsLlst != null">
+                songs_llst = #{songsLlst,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="pers.culushishui.dao.model.Song_list">
+        update song_list
+        set NAME = #{name,jdbcType=VARCHAR},
+        ICON_ADDRESS = #{iconAddress,jdbcType=VARCHAR},
+        USER_ID = #{userId,jdbcType=INTEGER},
+        CREATED_TIME = #{createdTime,jdbcType=TIMESTAMP},
+        NUMBER_OF_VISITS = #{numberOfVisits,jdbcType=BIGINT},
+        songs_llst = #{songsLlst,jdbcType=VARCHAR},
+        description = #{description,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

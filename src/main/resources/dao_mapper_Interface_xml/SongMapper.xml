@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.culushishui.dao.mapper.SongMapper">
+    <resultMap id="BaseResultMap" type="pers.culushishui.dao.model.Song">
+        <id column="SONG_ID" jdbcType="INTEGER" property="songId"/>
+        <result column="SONG_NAME" jdbcType="VARCHAR" property="songName"/>
+        <result column="FORMAT" jdbcType="VARCHAR" property="format"/>
+        <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime"/>
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+        <result column="ICON_ADDRESS" jdbcType="VARCHAR" property="iconAddress"/>
+        <result column="PHOTO_ADDRESS" jdbcType="VARCHAR" property="photoAddress"/>
+        <result column="SONG_ADDRESS" jdbcType="VARCHAR" property="songAddress"/>
+        <result column="NUMBER_OF_VISITS" jdbcType="VARCHAR" property="numberOfVisits"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        SONG_ID, SONG_NAME, FORMAT, UPDATED_TIME, USER_ID, ICON_ADDRESS, PHOTO_ADDRESS, SONG_ADDRESS,
+        NUMBER_OF_VISITS
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from song
+        where SONG_ID = #{songId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from song
+        where SONG_ID = #{songId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="pers.culushishui.dao.model.Song">
+        insert into song (SONG_ID, SONG_NAME, FORMAT,
+        UPDATED_TIME, USER_ID, ICON_ADDRESS,
+        PHOTO_ADDRESS, SONG_ADDRESS, NUMBER_OF_VISITS
+        )
+        values (#{songId,jdbcType=INTEGER}, #{songName,jdbcType=VARCHAR}, #{format,jdbcType=VARCHAR},
+        #{updatedTime,jdbcType=TIMESTAMP}, #{userId,jdbcType=INTEGER}, #{iconAddress,jdbcType=VARCHAR},
+        #{photoAddress,jdbcType=VARCHAR}, #{songAddress,jdbcType=VARCHAR}, #{numberOfVisits,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="pers.culushishui.dao.model.Song">
+        insert into song
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="songId != null">
+                SONG_ID,
+            </if>
+            <if test="songName != null">
+                SONG_NAME,
+            </if>
+            <if test="format != null">
+                FORMAT,
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+            <if test="iconAddress != null">
+                ICON_ADDRESS,
+            </if>
+            <if test="photoAddress != null">
+                PHOTO_ADDRESS,
+            </if>
+            <if test="songAddress != null">
+                SONG_ADDRESS,
+            </if>
+            <if test="numberOfVisits != null">
+                NUMBER_OF_VISITS,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="songId != null">
+                #{songId,jdbcType=INTEGER},
+            </if>
+            <if test="songName != null">
+                #{songName,jdbcType=VARCHAR},
+            </if>
+            <if test="format != null">
+                #{format,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="iconAddress != null">
+                #{iconAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="photoAddress != null">
+                #{photoAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="songAddress != null">
+                #{songAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="numberOfVisits != null">
+                #{numberOfVisits,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="pers.culushishui.dao.model.Song">
+        update song
+        <set>
+            <if test="songName != null">
+                SONG_NAME = #{songName,jdbcType=VARCHAR},
+            </if>
+            <if test="format != null">
+                FORMAT = #{format,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userId != null">
+                USER_ID = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="iconAddress != null">
+                ICON_ADDRESS = #{iconAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="photoAddress != null">
+                PHOTO_ADDRESS = #{photoAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="songAddress != null">
+                SONG_ADDRESS = #{songAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="numberOfVisits != null">
+                NUMBER_OF_VISITS = #{numberOfVisits,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where SONG_ID = #{songId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="pers.culushishui.dao.model.Song">
+        update song
+        set SONG_NAME = #{songName,jdbcType=VARCHAR},
+        FORMAT = #{format,jdbcType=VARCHAR},
+        UPDATED_TIME = #{updatedTime,jdbcType=TIMESTAMP},
+        USER_ID = #{userId,jdbcType=INTEGER},
+        ICON_ADDRESS = #{iconAddress,jdbcType=VARCHAR},
+        PHOTO_ADDRESS = #{photoAddress,jdbcType=VARCHAR},
+        SONG_ADDRESS = #{songAddress,jdbcType=VARCHAR},
+        NUMBER_OF_VISITS = #{numberOfVisits,jdbcType=VARCHAR}
+        where SONG_ID = #{songId,jdbcType=INTEGER}
+    </update>
+</mapper>

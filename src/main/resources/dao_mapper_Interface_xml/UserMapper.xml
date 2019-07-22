@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.culushishui.dao.mapper.UserMapper">
+    <resultMap id="BaseResultMap" type="pers.culushishui.dao.model.User">
+        <id column="ID" jdbcType="INTEGER" property="id"/>
+        <result column="NICKNAME" jdbcType="VARCHAR" property="nickname"/>
+        <result column="User_Account" jdbcType="VARCHAR" property="userAccount"/>
+        <result column="User_Account_Password" jdbcType="VARCHAR" property="userAccountPassword"/>
+        <result column="SIGNATURE" jdbcType="VARCHAR" property="signature"/>
+        <result column="AVATAR_ADDRESS" jdbcType="VARCHAR" property="avatarAddress"/>
+        <result column="CREATE_SONGLIST" jdbcType="VARCHAR" property="createSonglist"/>
+        <result column="COLLECT_SONGLIST" jdbcType="VARCHAR" property="collectSonglist"/>
+        <result column="CREATE_SONG" jdbcType="VARCHAR" property="createSong"/>
+        <result column="COLLECT_SONG" jdbcType="VARCHAR" property="collectSong"/>
+        <result column="Message_Manager_Id_Gather" jdbcType="VARCHAR" property="messageManagerIdGather"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID, NICKNAME, User_Account, User_Account_Password, SIGNATURE, AVATAR_ADDRESS, CREATE_SONGLIST,
+        COLLECT_SONGLIST, CREATE_SONG, COLLECT_SONG, Message_Manager_Id_Gather
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user
+        where ID = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectByAccount" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select ID
+        from  user
+        where User_Account =#{accound}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+        delete from user
+        where ID = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="pers.culushishui.dao.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user (ID, NICKNAME, User_Account,
+        User_Account_Password, SIGNATURE, AVATAR_ADDRESS,
+        CREATE_SONGLIST, COLLECT_SONGLIST, CREATE_SONG,
+        COLLECT_SONG, Message_Manager_Id_Gather)
+        values (#{id,jdbcType=INTEGER}, #{nickname,jdbcType=VARCHAR}, #{userAccount,jdbcType=VARCHAR},
+        #{userAccountPassword,jdbcType=VARCHAR}, #{signature,jdbcType=VARCHAR}, #{avatarAddress,jdbcType=VARCHAR},
+        #{createSonglist,jdbcType=VARCHAR}, #{collectSonglist,jdbcType=VARCHAR}, #{createSong,jdbcType=VARCHAR},
+        #{collectSong,jdbcType=VARCHAR}, #{messageManagerIdGather,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="pers.culushishui.dao.model.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                ID,
+            </if>
+            <if test="nickname != null">
+                NICKNAME,
+            </if>
+            <if test="userAccount != null">
+                User_Account,
+            </if>
+            <if test="userAccountPassword != null">
+                User_Account_Password,
+            </if>
+            <if test="signature != null">
+                SIGNATURE,
+            </if>
+            <if test="avatarAddress != null">
+                AVATAR_ADDRESS,
+            </if>
+            <if test="createSonglist != null">
+                CREATE_SONGLIST,
+            </if>
+            <if test="collectSonglist != null">
+                COLLECT_SONGLIST,
+            </if>
+            <if test="createSong != null">
+                CREATE_SONG,
+            </if>
+            <if test="collectSong != null">
+                COLLECT_SONG,
+            </if>
+            <if test="messageManagerIdGather != null">
+                Message_Manager_Id_Gather,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="nickname != null">
+                #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccount != null">
+                #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccountPassword != null">
+                #{userAccountPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarAddress != null">
+                #{avatarAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="createSonglist != null">
+                #{createSonglist,jdbcType=VARCHAR},
+            </if>
+            <if test="collectSonglist != null">
+                #{collectSonglist,jdbcType=VARCHAR},
+            </if>
+            <if test="createSong != null">
+                #{createSong,jdbcType=VARCHAR},
+            </if>
+            <if test="collectSong != null">
+                #{collectSong,jdbcType=VARCHAR},
+            </if>
+            <if test="messageManagerIdGather != null">
+                #{messageManagerIdGather,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="pers.culushishui.dao.model.User" useGeneratedKeys="true" keyProperty="id"  >
+        update user
+        <set>
+            <if test="nickname != null">
+                NICKNAME = #{nickname,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccount != null">
+                User_Account = #{userAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="userAccountPassword != null">
+                User_Account_Password = #{userAccountPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="signature != null">
+                SIGNATURE = #{signature,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarAddress != null">
+                AVATAR_ADDRESS = #{avatarAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="createSonglist != null">
+                CREATE_SONGLIST = #{createSonglist,jdbcType=VARCHAR},
+            </if>
+            <if test="collectSonglist != null">
+                COLLECT_SONGLIST = #{collectSonglist,jdbcType=VARCHAR},
+            </if>
+            <if test="createSong != null">
+                CREATE_SONG = #{createSong,jdbcType=VARCHAR},
+            </if>
+            <if test="collectSong != null">
+                COLLECT_SONG = #{collectSong,jdbcType=VARCHAR},
+            </if>
+            <if test="messageManagerIdGather != null">
+                Message_Manager_Id_Gather = #{messageManagerIdGather,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="pers.culushishui.dao.model.User">
+        update user
+        set NICKNAME = #{nickname,jdbcType=VARCHAR},
+        User_Account = #{userAccount,jdbcType=VARCHAR},
+        User_Account_Password = #{userAccountPassword,jdbcType=VARCHAR},
+        SIGNATURE = #{signature,jdbcType=VARCHAR},
+        AVATAR_ADDRESS = #{avatarAddress,jdbcType=VARCHAR},
+        CREATE_SONGLIST = #{createSonglist,jdbcType=VARCHAR},
+        COLLECT_SONGLIST = #{collectSonglist,jdbcType=VARCHAR},
+        CREATE_SONG = #{createSong,jdbcType=VARCHAR},
+        COLLECT_SONG = #{collectSong,jdbcType=VARCHAR},
+        Message_Manager_Id_Gather = #{messageManagerIdGather,jdbcType=VARCHAR}
+        where ID = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

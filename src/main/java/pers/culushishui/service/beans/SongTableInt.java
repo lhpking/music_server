@@ -1,0 +1,4 @@
+package pers.culushishui.service.beans;
+
+public interface SongTableInt {
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.culushishui.dao.mapper.LyricsMapper">
+    <resultMap id="BaseResultMap" type="pers.culushishui.dao.model.Lyrics">
+        <result column="SONG_NAME" jdbcType="VARCHAR" property="songName"/>
+        <result column="UPDATED_TIME" jdbcType="TIMESTAMP" property="updatedTime"/>
+        <result column="lyricAddress" jdbcType="VARCHAR" property="lyricaddress"/>
+        <result column="USER_ID" jdbcType="INTEGER" property="userId"/>
+    </resultMap>
+    <insert id="insert" parameterType="pers.culushishui.dao.model.Lyrics">
+        insert into lyrics (SONG_NAME, UPDATED_TIME, lyricAddress,
+        USER_ID)
+        values (#{songName,jdbcType=VARCHAR}, #{updatedTime,jdbcType=TIMESTAMP}, #{lyricaddress,jdbcType=VARCHAR},
+        #{userId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="pers.culushishui.dao.model.Lyrics">
+        insert into lyrics
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="songName != null">
+                SONG_NAME,
+            </if>
+            <if test="updatedTime != null">
+                UPDATED_TIME,
+            </if>
+            <if test="lyricaddress != null">
+                lyricAddress,
+            </if>
+            <if test="userId != null">
+                USER_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="songName != null">
+                #{songName,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lyricaddress != null">
+                #{lyricaddress,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+</mapper>

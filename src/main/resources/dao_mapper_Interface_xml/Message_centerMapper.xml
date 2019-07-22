@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.culushishui.dao.mapper.Message_centerMapper">
+    <resultMap id="BaseResultMap" type="pers.culushishui.dao.model.Message_center">
+        <result column="MESSAGE_CALSSIFICATION_ID" jdbcType="INTEGER" property="messageCalssificationId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="CREATED_TIME" jdbcType="TIMESTAMP" property="createdTime"/>
+        <result column="Massage_content" jdbcType="VARCHAR" property="massageContent"/>
+    </resultMap>
+    <insert id="insert" parameterType="pers.culushishui.dao.model.Message_center">
+        insert into message_center (MESSAGE_CALSSIFICATION_ID, user_id,
+        CREATED_TIME, Massage_content)
+        values (#{messageCalssificationId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        #{createdTime,jdbcType=TIMESTAMP}, #{massageContent,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="pers.culushishui.dao.model.Message_center">
+        insert into message_center
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="messageCalssificationId != null">
+                MESSAGE_CALSSIFICATION_ID,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="createdTime != null">
+                CREATED_TIME,
+            </if>
+            <if test="massageContent != null">
+                Massage_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="messageCalssificationId != null">
+                #{messageCalssificationId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="massageContent != null">
+                #{massageContent,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

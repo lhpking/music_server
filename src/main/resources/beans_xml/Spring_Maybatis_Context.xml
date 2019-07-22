@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <context:property-placeholder location="datasource.properties"/>
+    <!--配置数据源-->
+    <bean id="datasource1" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <!--驱动类名-->
+        <property name="driverClass" value="com.mysql.cj.jdbc.Driver"/>
+        <!--url-->
+        <property name="jdbcUrl"
+                  value="jdbc:mysql://142.11.249.117:3306/musicserverdatabase?useUnicode=true&amp;characterEncoding=utf8"/>
+        <!--用户名-->
+        <property name="user" value="culushishui"/>
+        <!--密码-->
+        <property name="password" value="zcyzcyzcy1998"/>
+        <!--当连接池的连接耗尽的时候，从p0一次性同时获取的连接数-->
+        <property name="acquireIncrement" value="5"/>
+        <!--初始化连接池的大小-->
+        <property name="initialPoolSize" value="5"/>
+        <!--连接池连接最小个数-->
+        <property name="minPoolSize" value="2"/>
+        <!--l连接池最大个数-->
+        <property name="maxPoolSize" value="10"/>
+
+    </bean>
+    <!--配置sqlSessionFactoryBean-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="datasource1"/>
+        <!--指定映射器xml文件位置,允许使用-->
+        <property name="mapperLocations" value="classpath:dao_mapper_Interface_xml/**/*.xml"/>
+        <!--指定事务-->
+        <!--定义事物管理器，由spring管理事务 -->
+    </bean>
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="datasource1"/>
+    </bean>
+    <!--也就是要将接口和sqlSessionFactoryp配置的映射xml文件撮合到一起 -->
+    <bean class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="mapperInterface" value="pers.culushishui.dao.mapper.UserMapper"></property>
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+    </bean>
+
+
+</beans>
